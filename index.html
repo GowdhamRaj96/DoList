@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+*{
+    /* margin: 0;
+    padding: 0;
+    box-sizing: border-box; */
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+   background-color: #E0FFFF;
+}
+.container{
+    background-color: #F0E68C;
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #FBCEB1;
+    padding: 12px;
+    border-radius: 10px;
+}
+.container h2{
+    text-align: center;
+}
+.inputbox{
+    display: flex;
+   
+}
+.inputbox input{
+    flex: 1;
+    padding: 8px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 7px;
+
+}
+.inputbox button{
+    background: #E31837;
+    border: none;
+    color:honeydew;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 7px;
+} 
+.list-section ul{
+    list-style-type: none;
+   padding: 0;
+   margin: 0;
+   margin-top: 12px;
+
+}
+.list-section ul li{
+    border: 1px solid;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.list-section ul li .done{
+    text-decoration: line-through;
+}
+.list-section ul li .done:hover{
+   font-size: 1.5rem;
+}
+.list-section ul li .close{
+    background-color: #470ff4;
+    color: beige;
+    padding: 12px;
+    cursor: pointer;
+ 
+}
+.list-section ul li .close:hover{
+   box-shadow: #E31837 0 1px 7px;
+}
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2 class="title">TO DO LIST</h2>
+   <div class="inputbox">
+    <input type="text" class="todolist" placeholder="Activities/Enter some text" id="todolist">
+    <button type="submit" onclick="additems()">ADD</button>
+   </div>
+   <div class="list-section">
+    <ul id="todoul">
+        
+    </ul>
+   </div>
+</div>
+
+<!-- javascript code -->
+
+    <script>
+        const todolist = document.getElementById('todolist');
+const todoUl = document.getElementById('todoul');
+function additems(){
+   if(todolist.value.trim() === "")
+{
+    alert("Enter Some Text"); 
+}else{
+   console.log(todolist.value.trim());
+   const liTag = document.createElement("li");
+   const spanText = document.createElement("span");
+   const textNode = document.createTextNode(todolist.value.trim());
+   spanText.appendChild(textNode);
+   spanText.addEventListener('click', (e) => {
+     console.log(e.target);
+     e.target.classList.toggle('done');
+   })
+   const spanClose = document.createElement('span');
+   spanClose.classList.add('close');
+   spanClose.innerHTML = '&times;';
+   spanClose.addEventListener('click' , (e) => {
+    console.log(e.target.parentElement);
+    const li = e.target.parentElement;
+    li.parentElement.removeChild(li);
+} )
+   liTag.appendChild(spanText);
+   liTag.appendChild(spanClose);
+   
+   todoUl.appendChild(liTag);
+   todolist.value = "";
+
+}
+   
+   
+}
+    </script>
+</body>
+</html>
